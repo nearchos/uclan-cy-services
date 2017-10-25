@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns="http://java.sun.com/xml/ns/javaee"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
+         version="2.5">
+
+    <servlet>
+        <servlet-name>UserProfileServlet</servlet-name>
+        <jsp-file>/users/profile.jsp</jsp-file>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>UserProfileServlet</servlet-name>
+        <url-pattern>/users/profile</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>LinkAccountsServlet</servlet-name>
+        <servlet-class>org.inspirecenter.uclancyservices.users.LinkAccountsServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>LinkAccountsServlet</servlet-name>
+        <url-pattern>/users/link-accounts</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>RedirectServlet</servlet-name>
+        <jsp-file>/redirect/index.jsp</jsp-file>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>RedirectServlet</servlet-name>
+        <url-pattern>/redirect</url-pattern>
+    </servlet-mapping>
+
+    <!-- Admin pages -->
+    <servlet>
+        <servlet-name>AdminIndexServlet</servlet-name>
+        <jsp-file>/admin/index.jsp</jsp-file>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>AdminIndexServlet</servlet-name>
+        <url-pattern>/admin</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>AdminUsersServlet</servlet-name>
+        <jsp-file>/admin/users.jsp</jsp-file>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>AdminUsersServlet</servlet-name>
+        <url-pattern>/admin/users</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>AdminUserServlet</servlet-name>
+        <jsp-file>/admin/user.jsp</jsp-file>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>AdminUserServlet</servlet-name>
+        <url-pattern>/admin/user</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>AdminRolesServlet</servlet-name>
+        <jsp-file>/admin/roles.jsp</jsp-file>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>AdminRolesServlet</servlet-name>
+        <url-pattern>/admin/roles</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>AddRoleServlet</servlet-name>
+        <servlet-class>org.inspirecenter.uclancyservices.admin.AddRoleServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>AddRoleServlet</servlet-name>
+        <url-pattern>/admin/add-role</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>DeleteUserServlet</servlet-name>
+        <servlet-class>org.inspirecenter.uclancyservices.admin.DeleteUserServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>DeleteUserServlet</servlet-name>
+        <url-pattern>/admin/delete-user</url-pattern>
+    </servlet-mapping>
+    <!-- End of Admin pages -->
+
+</web-app>
