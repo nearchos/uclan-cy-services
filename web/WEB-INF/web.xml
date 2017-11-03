@@ -76,7 +76,23 @@
         <servlet-name>AddRoleServlet</servlet-name>
         <url-pattern>/admin/add-role</url-pattern>
     </servlet-mapping>
+    <servlet>
+        <servlet-name>DeleteRoleServlet</servlet-name>
+        <servlet-class>org.inspirecenter.uclancyservices.admin.DeleteRoleServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>DeleteRoleServlet</servlet-name>
+        <url-pattern>/admin/delete-role</url-pattern>
+    </servlet-mapping>
 
+    <servlet>
+        <servlet-name>EditUserServlet</servlet-name>
+        <servlet-class>org.inspirecenter.uclancyservices.admin.EditUserServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>EditUserServlet</servlet-name>
+        <url-pattern>/admin/edit-user</url-pattern>
+    </servlet-mapping>
     <servlet>
         <servlet-name>DeleteUserServlet</servlet-name>
         <servlet-class>org.inspirecenter.uclancyservices.admin.DeleteUserServlet</servlet-class>

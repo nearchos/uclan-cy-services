@@ -113,10 +113,32 @@ public class UserEntity {
         return entity != null ? new UserEntity(entity) : null;
     }
 
+    static public UserEntity editUser(final String email, final String name) {
+        final DatastoreService datastoreService = DatastoreServiceFactory.getDatastoreService();
+        final Query query = new Query(KIND).setFilter(new Query.FilterPredicate(PROPERTY_EMAIL, Query.FilterOperator.EQUAL, email));
+        final PreparedQuery preparedQuery = datastoreService.prepare(query);
+        final List<Entity> userEntities = preparedQuery.asList(FetchOptions.Builder.withDefaults());
+        final Entity userEntity;
+        if(userEntities.size() == 0) {
+            log.info("Could not find entity with 'email': " + email);
+            return null;
+        } else if(userEntities.size() == 1) {
+            userEntity = userEntities.get(0);
+        } else {
+            log.severe("More than 1 entities with 'email': " + email);
+            userEntity = userEntities.get(0);
+        }
+
+        userEntity.setProperty(PROPERTY_NAME, name);
+        datastoreService.put(userEntity);
+
+        return new UserEntity(userEntity);
+    }
+
     static public String deleteUserEntityByEmail(final String email) {
         final Entity entity = getAndCheckUserEntity(PROPERTY_EMAIL, email);
         if(entity == null) {
-            return "Cound not delete entity - user not found with email: " + email;
+            return "Could not delete entity - user not found with email: " + email;
         } else {
             DatastoreServiceFactory.getDatastoreService().delete(entity.getKey());
             return "Deleted user with email: " + email;

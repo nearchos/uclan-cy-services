@@ -36,6 +36,7 @@
     <p class="text-danger">Email not specified or invalid or not found: <%=email%></p>
 <%
             } else {
+                final String message = request.getParameter("message");
 %>
     <!-- Modal -->
     <div class="modal fade" id="deleteUser" tabindex="-1" role="dialog" aria-hidden="true">
@@ -61,6 +62,8 @@
         </div>
     </div>
 
+    <p class="text-info"><%=message == null ? "" : message%></p>
+
     <!-- Button trigger modal -->
     <button type="button" class="btn btn-outline-danger m-sm-2" data-toggle="modal" data-target="#deleteUser">Delete user</button>
 
@@ -69,20 +72,24 @@
         <tbody>
             <tr>
                 <th scope="row">Email</th>
-                <td><%=email%></td>
+                <td colspan="2"><%=email%></td>
             </tr>
             <tr>
                 <th scope="row">Name</th>
-                <td><input><%=userEntity.getName()%></td>
+                <form action="edit-user" method="post"><input type="hidden" name="email" value="<%=email%>">
+                <td><label><input type="text" name="name" value="<%=userEntity.getName()%>"></label></td>
+                <td><input class="btn btn-outline-success" type="submit"></td>
+                </form>
             </tr>
             <tr>
                 <th scope="row">UCLan ID</th>
                 <%--todo confirm--%>
-                <td><span class="text-primary"><%=userEntity.getUclanId()%></span> linked on <span class="text-info"><%=userEntity.getConfirmedAsFormattedDateTime()%></span> <a class="btn btn-outline-danger" href="todo">Unlink</a></td>
+                <td><span class="text-primary"><%=userEntity.getUclanId()%></span> linked on <span class="text-info"><%=userEntity.getConfirmedAsFormattedDateTime()%></span></td>
+                <td><a class="btn btn-outline-danger" href="todo">Unlink</a></td>
             </tr>
             <tr>
                 <th scope="row">Roles</th>
-                <td>
+                <td colspan="2">
                     <%-- See https://bootsnipp.com/snippets/nPMDy --%>
                     <div class="form-group badge-checkboxes">
 <%

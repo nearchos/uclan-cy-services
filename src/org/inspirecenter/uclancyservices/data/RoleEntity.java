@@ -84,6 +84,26 @@ public class RoleEntity {
         return allRoles;
     }
 
+    static public boolean deleteEntityByKeyword(final String keyword) {
+        final DatastoreService datastoreService = DatastoreServiceFactory.getDatastoreService();
+        final Query query = new Query(KIND).setFilter(new Query.FilterPredicate(PROPERTY_KEYWORD, Query.FilterOperator.EQUAL, keyword));
+        final PreparedQuery preparedQuery = datastoreService.prepare(query);
+        final List<Entity> entities = preparedQuery.asList(FetchOptions.Builder.withDefaults());
+
+        final Entity roleEntity;
+        if(entities.size() == 0) {
+            log.info("Could not find entity with " + PROPERTY_KEYWORD + ": " + keyword);
+            return false;
+        } else if(entities.size() == 1) {
+            datastoreService.delete(entities.get(0).getKey());
+            return true;
+        } else {
+            log.severe("More than 1 entities for : " + PROPERTY_KEYWORD + ": " + keyword);
+            datastoreService.delete(entities.get(0).getKey());
+            return true;
+        }
+    }
+
     static private Entity getRoleEntityByKeyword(final String keyword) {
         final DatastoreService datastoreService = DatastoreServiceFactory.getDatastoreService();
         final Query query = new Query(KIND).setFilter(new Query.FilterPredicate(PROPERTY_KEYWORD, Query.FilterOperator.EQUAL, keyword));
@@ -95,10 +115,10 @@ public class RoleEntity {
             log.info("Could not find entity with " + PROPERTY_KEYWORD + ": " + keyword);
             return null;
         } else if(entities.size() == 1) {
-            roleEntity= entities.get(0);
+            roleEntity = entities.get(0);
         } else {
             log.severe("More than 1 entities for : " + PROPERTY_KEYWORD + ": " + keyword);
-            roleEntity= entities.get(0);
+            roleEntity = entities.get(0);
         }
 
         return roleEntity;
